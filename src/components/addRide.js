@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { userFields } from '../constants';
 import { BsPlusSlashMinus } from "react-icons/bs";
 import { addRideDetails } from '../api/add-ride-api';
+import AutocompleteInput from './autocomplete';
 
 const AddRide = () => {
   const [phoneNo, setPhoneNo] = useState('');
@@ -54,6 +55,7 @@ const AddRide = () => {
         <div className="card-header text-center"> Ride Details </div>
         <form onSubmit={handleSubmit} className='p-4'>
 
+        {/*Name & Phone Number*/}
         <div className="row mb-3 d-flex align-items-center">
           <label htmlFor="name" className="col-sm-2 col-form-label">Name:</label>
           <div className="col-sm-4">
@@ -67,19 +69,19 @@ const AddRide = () => {
           </div>
         </div>
 
+        {/*Start & End Location*/}
         <div className="row mb-3 d-flex align-items-center">
           <label htmlFor="source" className="col-sm-2 col-form-label">Start Location:</label>
-          <div className="col-sm-4">
-            <input type="text" id="source" className="form-control" value={source} 
-            onChange={(e) => setSource(e.target.value)} style={{height: "2rem"}} required/>
+          <div className="col-sm-4 position-relative">
+            <AutocompleteInput id="source" value={source} onChange={setSource}/>
           </div>
           <label htmlFor="destination" className="col-sm-2 col-form-label">End Location:</label>
-          <div className="col-sm-4">
-            <input type="text" id="destination" className="form-control" value={destination} 
-            onChange={(e) => setDestination(e.target.value)} style={{height: "2rem"}} required/>
+          <div className="col-sm-4 position-relative">
+            <AutocompleteInput id="destination" value={destination} onChange={setDestination}/>
           </div>
         </div>
 
+        {/*Departure Time & Time Flexibility*/}
         <div className="row mb-3 d-flex align-items-center">
           <label htmlFor="departureTime" className="col-sm-2 col-form-label">Departure Time:</label>
           <div className="col-sm-4">
@@ -105,6 +107,7 @@ const AddRide = () => {
           </div>
         </div>
 
+        {/*Date of Departure*/}
         <div className="row mb-3 d-flex align-items-center">
           <label htmlFor="dateOfDeparture" className="col-sm-2 col-form-label">Date of Departure:</label>
           <div className="col-sm-10">
@@ -113,6 +116,7 @@ const AddRide = () => {
           </div>
         </div>
 
+        {/*Comments*/}
         <div className="row mb-3">
           <label htmlFor="comments" className="col-sm-2 col-form-label">Comments:</label>
           <div className="col-sm-10">
