@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import _ from 'lodash';
 
-const AutocompleteInput = ({ id, value, onChange }) => {
+const AutocompleteInput = ({ id, value, onChange, isFilter }) => {
   const [suggestions, setSuggestions] = useState([]);
 
   const fetchSuggestions = _.debounce(async (inputValue) => {
@@ -44,7 +44,7 @@ const AutocompleteInput = ({ id, value, onChange }) => {
   return (
     <div>
       <input type="text" id={id} className="form-control" value={value} onChange={handleInputChange} 
-      style={{ height: "2rem" }} required spellCheck="false"/>
+      style={{ fontSize: "15px", height: "1.75rem" }} required={!isFilter} spellCheck="false"/>
         {suggestions.length > 0 && (
             <ul className="list-group position-absolute" style={{ zIndex: 10, width: '120%' }}>
                 {suggestions.map((suggestion, index) => (

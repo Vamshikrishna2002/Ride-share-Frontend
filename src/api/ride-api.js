@@ -27,6 +27,14 @@ export async function getAllRides(){
     });
 }
 
+export async function getFilteredRides(data){
+    return await axios.post(`${BASE_URL}/api/v1/ride/filter`, data, {
+        headers:{
+            "Authorization" : localStorage.getItem(userFields.jwtToken)
+        },
+    });
+}
+
 export async function getMyRides(){
     return await axios.get(`${BASE_URL}/api/v1/ride/get-mine`, {
         headers:{
@@ -50,3 +58,4 @@ export async function updateStar(rideId){
         },
     });
 }
+

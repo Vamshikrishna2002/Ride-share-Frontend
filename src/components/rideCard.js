@@ -66,11 +66,11 @@ const RideCard = ({ ride }) => {
             <div className='d-flex justify-content-between align-items-center'>
                 <h5>{user.name}</h5>
                 <div className='d-flex'>
-                    <h4 className='me-4' style={{cursor: "pointer"}} onClick={()=>{ setIsInfoModalOpen(true) }}><ImInfo/></h4>
-                    {isStarred ? <h4 style={{cursor: "pointer"}}><FaStar onClick={onClickHandler}/></h4> : 
-                    <h4 style={{cursor: "pointer"}}><FaRegStar onClick={onClickHandler}/></h4> }
+                    <h5 className='me-4' style={{cursor: "pointer"}} onClick={()=>{ setIsInfoModalOpen(true) }}><ImInfo/></h5>
+                    {isStarred ? <h5 style={{cursor: "pointer"}}><FaStar onClick={onClickHandler}/></h5> : 
+                    <h5 style={{cursor: "pointer"}}><FaRegStar onClick={onClickHandler}/></h5> }
                     {(route === "my-rides") && (
-                        <h4 className='ms-4' style={{cursor: "pointer"}} onClick={()=>{ setIsUpdateModalOpen(true) }}><FaPencilAlt/></h4>
+                        <h5 className='ms-4' style={{cursor: "pointer"}} onClick={()=>{ setIsUpdateModalOpen(true) }}><FaPencilAlt/></h5>
                     )}
                 </div>
             </div>
@@ -91,10 +91,10 @@ const RideCard = ({ ride }) => {
                 </Modal.Body>
             </Modal>
 
-            <p><span className='kanit-regular'>Phone: </span>{ride.phoneNo}</p>
-            <p><span className='kanit-regular'>Source: </span>{truncateString(ride.src, 110)}</p>
-            <p><span className='kanit-regular'>Destination: </span>{truncateString(ride.dst, 110)}</p>
-            <p><span className='kanit-regular'>Departure Date & Time: </span>{ride.dateOfDeparture}, {ride.departureTime}</p>
+            <p style={{fontSize: "15px"}}><span className='kanit-regular'>Phone: </span>{ride.phoneNo}</p>
+            <p style={{fontSize: "15px"}}><span className='kanit-regular'>Source: </span>{truncateString(ride.src, 100)}</p>
+            <p style={{fontSize: "15px"}}><span className='kanit-regular'>Destination: </span>{truncateString(ride.dst, 100)}</p>
+            <p style={{fontSize: "15px"}}><span className='kanit-regular'>Departure Date & Time: </span>{ride.dateOfDeparture}, {ride.departureTime}</p>
         </div>
     );
 };
