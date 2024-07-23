@@ -59,3 +59,11 @@ export async function updateStar(rideId){
     });
 }
 
+export async function deleteRideById(rideId){
+    return await axios.get(`${BASE_URL}/api/v1/ride/delete/${rideId}`, {
+        headers:{
+            "Authorization" : localStorage.getItem(userFields.jwtToken)
+        },
+    });
+}
+
