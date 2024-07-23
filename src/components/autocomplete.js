@@ -44,7 +44,7 @@ const AutocompleteInput = ({ id, value, onChange }) => {
   return (
     <div>
       <input type="text" id={id} className="form-control" value={value} onChange={handleInputChange} 
-      style={{ height: "2rem" }} required/>
+      style={{ height: "2rem" }} required spellCheck="false"/>
         {suggestions.length > 0 && (
             <ul className="list-group position-absolute" style={{ zIndex: 10, width: '120%' }}>
                 {suggestions.map((suggestion, index) => (

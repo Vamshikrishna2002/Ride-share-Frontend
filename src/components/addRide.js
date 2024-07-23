@@ -1,12 +1,12 @@
 import './style.css';
-import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { userFields } from '../constants';
 import { BsPlusSlashMinus } from "react-icons/bs";
-import { addRideDetails } from '../api/add-ride-api';
+import { addRideDetails, updateRideDetails } from '../api/ride-api';
 import AutocompleteInput from './autocomplete';
+import { useLocation } from 'react-router-dom';
 
-const AddRide = () => {
+const AddRide = ({ ride, setIsUpdateModalOpen }) => {
   const [phoneNo, setPhoneNo] = useState('');
   const [source, setSource] = useState('');
   const [destination, setDestination] = useState('');
@@ -16,6 +16,22 @@ const AddRide = () => {
   const [comments, setComments] = useState('');
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
+
+  const location = useLocation();
+  const route = location.pathname.slice(1);
+
+  useEffect(()=>{
+    if(route === 'my-rides'){
+      setPhoneNo(ride.phoneNo);
+      setSource(ride.src);
+      setDestination(ride.dst);
+      setDepartureTime(ride.departureTime);
+      setTimeFlexibility(ride.timeFlexibility);
+      setDateOfDeparture(ride.dateOfDeparture);
+      setComments(ride.comments);
+    }
+  // eslint-disable-next-line
+  }, []);  
 
   function clearState(){
     setPhoneNo("");
@@ -31,15 +47,32 @@ const AddRide = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const rideDetails = {userId: localStorage.getItem(userFields.userId), phoneNo, src: source, dst: destination, 
-      departureTime, timeFlexibility, dateOfDeparture, comments
-    }
+    const rideDetails = {phoneNo, src: source, dst: destination, departureTime, timeFlexibility, dateOfDeparture, comments}
 
     addRideDetails(rideDetails)
     .then(res=>{
       setIsError(false);
       setMessage(res.data.message);
-      setTimeout(clearState, 5000);
+      setTimeout(clearState, 2500);
+    })
+    .catch(err=>{
+      setIsError(true);
+      setMessage(err.response.data.message);
+      console.log(err);
+  })
+  };
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+
+    const rideDetails = {phoneNo, src: source, dst: destination, departureTime, timeFlexibility, dateOfDeparture, comments}
+
+    updateRideDetails(rideDetails, ride._id)
+    .then(res=>{
+      setIsError(false);
+      setMessage(res.data.message);
+      setTimeout(()=>{setIsUpdateModalOpen(false)}, 2500);
+      window.location.reload();
     })
     .catch(err=>{
       setIsError(true);
@@ -50,10 +83,9 @@ const AddRide = () => {
 
   return (
     <div>
-      <h5 className='kanit-regular text-center mb-4'>Hi {localStorage.getItem(userFields.name)}, Add the Ride Details</h5>
       <div className='card shadow mx-auto kanit-light' style={{width: "60vw"}}>
         <div className="card-header text-center"> Ride Details </div>
-        <form onSubmit={handleSubmit} className='p-4'>
+        <form className='p-4'>
 
         {/*Name & Phone Number*/}
         <div className="row mb-3 d-flex align-items-center">
@@ -121,15 +153,19 @@ const AddRide = () => {
           <label htmlFor="comments" className="col-sm-2 col-form-label">Comments:</label>
           <div className="col-sm-10">
             <textarea id="comments" className="form-control" value={comments} 
-            onChange={(e) => setComments(e.target.value)}/>
+            onChange={(e) => setComments(e.target.value)} spellCheck="false"/>
           </div>
         </div>
         {message && (
           <div style={isError ? {color: "#dc3545"}: {color: "#28a745"}} className="kanit-light text-center mb-3">{message}</div>
         )}
+        {(route === 'my-rides')?
         <div className="text-center">
-            <button type="submit" className="btn btn-primary">Submit</button>
-        </div>
+            <button type="submit" className="btn btn-primary" onClick={handleUpdate}>Update</button>
+        </div> :
+        <div className="text-center">
+            <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
+        </div>}
       </form>
     </div>
     </div>

@@ -17,7 +17,7 @@ function Auth(){
     useEffect(()=>{
         const token = localStorage.getItem(userFields.jwtToken);
         if(!token) return;
-        window.location.href = "/home";
+        window.location.href = "/rides";
     },[]);
 
     function onFormChange(e){
@@ -66,7 +66,7 @@ function Auth(){
             localStorage.setItem(userFields.email,res.data.email);
             localStorage.setItem(userFields.jwtToken,res.data.jwtToken);
 
-            window.location.href = "/home";
+            window.location.href = "/rides";
         }) 
         .catch(err=>{
             setIsError(true);

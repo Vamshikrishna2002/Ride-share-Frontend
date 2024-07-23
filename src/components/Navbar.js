@@ -16,7 +16,7 @@ function NavigationBar() {
   return (
     <Navbar expand={expand} className="mb-4 shadow">
         <Container fluid>
-        <Navbar.Brand href="/" className='kanit-regular'>Ride Share</Navbar.Brand>
+        <Navbar.Brand href="/rides" className='kanit-regular'>Ride Share</Navbar.Brand>
         <Navbar.Toggle/>
         <Navbar.Offcanvas placement="end">
             <Offcanvas.Header closeButton>
@@ -24,7 +24,8 @@ function NavigationBar() {
             </Offcanvas.Header>
             <Offcanvas.Body>
             <Nav className="justify-content-end flex-grow-1 pe-3 kanit-light">
-                <Nav.Link href="/">Home</Nav.Link>
+                <Nav.Link href="/rides">Rides</Nav.Link>
+                <Nav.Link href="/add-ride">Add Ride</Nav.Link>
                 <Nav.Link href="/my-rides">My Rides</Nav.Link>
                 <Nav.Link href="/starred-rides">Starred Rides</Nav.Link>
                 <Nav.Link onClick={handleLogout}>
