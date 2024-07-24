@@ -71,7 +71,7 @@ const RideModal = ({ show, onHide, ride, user }) => {
                     <p><span className='kanit-regular'>Destination (Red): </span>{ride.dst}</p>
                     <p><span className='kanit-regular'>Departure Date & Time: </span>{ride.dateOfDeparture}, {ride.departureTime}</p>
                     <p><span className='kanit-regular'>Time Flexibility: </span>{ride.timeFlexibility} minutes</p>
-                    <p><span className='kanit-regular'>Comments: </span>{ride.comments}</p>
+                    {ride.comments && <p><span className='kanit-regular'>Comments: </span>{ride.comments}</p>}
                 </div>
                 <div
                     ref={mapContainerRef}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { login, register } from "../api/auth-api";
+import { login, register, verifyJWT } from "../api/auth-api";
 import { userFields } from "../constants";
 import './style.css';
 
@@ -16,8 +16,17 @@ function Auth(){
 
     useEffect(()=>{
         const token = localStorage.getItem(userFields.jwtToken);
-        if(!token) return;
-        window.location.href = "/rides";
+        if (!token) return;
+        else {
+            verifyJWT()
+            .then(()=>{
+                window.location.href = "/rides";
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+        }
+        
     },[]);
 
     function onFormChange(e){

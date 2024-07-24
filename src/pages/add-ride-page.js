@@ -1,6 +1,7 @@
 import AddRide from "../components/addRide";
 import NavigationBar from "../components/Navbar";
 
+
 function AddRidePage() {
   return (
     <>

@@ -56,6 +56,10 @@ const AddRide = ({ ride, setIsUpdateModalOpen }) => {
       setTimeout(clearState, 2500);
     })
     .catch(err=>{
+      if (err.response.data.message === 'Token provided is invalid or expired.') {
+        localStorage.clear();
+        window.location.href = "/";
+      }
       setIsError(true);
       setMessage(err.response.data.message);
       console.log(err);
@@ -75,6 +79,10 @@ const AddRide = ({ ride, setIsUpdateModalOpen }) => {
       window.location.reload();
     })
     .catch(err=>{
+      if (err.response.data.message === 'Token provided is invalid or expired.') {
+        localStorage.clear();
+        window.location.href = "/";
+      }
       setIsError(true);
       setMessage(err.response.data.message);
       console.log(err);

@@ -29,7 +29,10 @@ const RideCard = ({ ride }) => {
             setUser(res.data);
         })
         .catch(err=>{
-            console.log(err);
+            if (err.response.data.message === 'Token provided is invalid or expired.') {
+                localStorage.clear();
+                window.location.href = "/";
+            }
         })
 
         getUserById(localStorage.getItem(userFields.userId))
@@ -39,7 +42,10 @@ const RideCard = ({ ride }) => {
             }
         })
         .catch(err=>{
-            console.log(err);
+            if (err.response.data.message === 'Token provided is invalid or expired.') {
+                localStorage.clear();
+                window.location.href = "/";
+            };
         })
 
         const calculateTimeLeft = () => {
@@ -60,7 +66,10 @@ const RideCard = ({ ride }) => {
                     window.location.reload();
                 })
                 .catch(err=>{
-                    console.log(err);
+                    if (err.response.data.message === 'Token provided is invalid or expired.') {
+                        localStorage.clear();
+                        window.location.href = "/";
+                    }
                 })
             }
         };
@@ -86,7 +95,10 @@ const RideCard = ({ ride }) => {
     const onClickHandler = () => {
         updateStar(ride._id)
         .catch(err=>{
-            console.log(err);
+            if (err.response.data.message === 'Token provided is invalid or expired.') {
+                localStorage.clear();
+                window.location.href = "/";
+            }
         })
         window.location.reload();
     }
