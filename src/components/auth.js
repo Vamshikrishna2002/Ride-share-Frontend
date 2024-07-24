@@ -27,7 +27,7 @@ function Auth(){
             })
         }
         
-    },[]);
+    });
 
     function onFormChange(e){
         if(e.target.name === userFields.name)

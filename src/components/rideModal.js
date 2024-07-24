@@ -36,13 +36,42 @@ const RideModal = ({ show, onHide, ride, user }) => {
         });
         map.addControl(nav, 'top-left');
 
-        new Marker({ color: 'green' })
+        new Marker({ color: 'green', opacity: '0.65' })
             .setLngLat(sourceCoords)
             .addTo(map);
 
-        new Marker({ color: 'red' })
+        new Marker({ color: 'red', opacity: '0.65' })
             .setLngLat(destinationCoords)
             .addTo(map);
+        
+        const geojson = {
+            type: 'Feature',
+            geometry: {
+                type: 'LineString',
+                coordinates: [sourceCoords, destinationCoords],
+            },
+        };
+
+        map.on('load', () => {
+            map.addSource('route', {
+                type: 'geojson',
+                data: geojson,
+            });
+
+            map.addLayer({
+                id: 'route',
+                type: 'line',
+                source: 'route',
+                layout: {
+                    'line-join': 'round',
+                    'line-cap': 'round',
+                },
+                paint: {
+                    'line-color': '#ff7f50',
+                    'line-width': 5,
+                },
+            });
+        });
 
         mapInstanceRef.current = map;
 
