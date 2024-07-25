@@ -24,7 +24,7 @@ const RideModal = ({ show, onHide, ride, user }) => {
             zoom: 10,
             style: 'https://api.olamaps.io/tiles/vector/v1/styles/default-light-standard/style.json',
             transformRequest: (url, resourceType) => {
-                const apiKey = 'yoIOYyd9TTE8rjmntp0s3X0elA1GMbJGjJRet18G';
+                const apiKey = process.env.REACT_APP_OLA_MAPS_API_KEY;
                 const newUrl = new URL(url);
                 newUrl.searchParams.set('api_key', apiKey);
                 return { url: newUrl.toString(), resourceType };

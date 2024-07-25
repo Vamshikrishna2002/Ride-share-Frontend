@@ -106,7 +106,7 @@ const RideCard = ({ ride }) => {
     return (
         <div className="kanit-light card border shadow p-3 mx-2 mb-5" style={{width: "28vw"}}>
             <div className='d-flex justify-content-between align-items-center'>
-                <h5>{user.name}</h5>
+                {(user.name) && <h5>{truncateString(user.name, 10)}</h5>}
                 <div className='d-flex'>
                     <h5 className='me-4 mt-1 px-1 border shadow' style={{backgroundColor: timeColor}}>{timeLeft}</h5>
                     <h5 className='me-4' style={{cursor: "pointer"}} onClick={()=>{ setIsInfoModalOpen(true) }}><ImInfo/></h5>

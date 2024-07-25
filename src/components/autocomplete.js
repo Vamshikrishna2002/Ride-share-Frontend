@@ -10,7 +10,7 @@ const AutocompleteInput = ({ id, value, onChange, isFilter }) => {
         const response = await axios.get('https://api.olamaps.io/places/v1/autocomplete', {
           params: {
             input: inputValue,
-            api_key: 'yoIOYyd9TTE8rjmntp0s3X0elA1GMbJGjJRet18G'
+            api_key: process.env.REACT_APP_OLA_MAPS_API_KEY,
           }
         });
 
