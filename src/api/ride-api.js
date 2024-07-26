@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { userFields } from '../constants';
 
-const BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000';
+const BASE_URL = 'https://ride-share-api.onrender.com';
 
 export async function addRideDetails(data){
     return await axios.post(`${BASE_URL}/api/v1/ride/add`, data, {
