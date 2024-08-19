@@ -20,6 +20,7 @@ const AddRide = ({ ride, setIsUpdateModalOpen }) => {
   const location = useLocation();
   const route = location.pathname.slice(1);
 
+  //useEffect
   useEffect(()=>{
     if(route === 'my-rides'){
       setPhoneNo(ride.phoneNo);
